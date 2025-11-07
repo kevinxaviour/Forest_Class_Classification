@@ -7,14 +7,29 @@ import boto3
 import io
 import os
 
-bucket_name = "forestclassification"  
-model_key = os.getenv("MODEL_KEY")             
-encoder_key = os.getenv("ENCODER_KEY")         
-skew_key = os.getenv("SKEW_KEY")               
-label_encoder_key = os.getenv("LABEL_ENCODER_KEY")
-AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-AWS_DEFAULT_REGION = os.getenv("AWS_DEFAULT_REGION", "ap-south-1")
+# bucket_name = "forestclassification"  
+# model_key = os.getenv("MODEL_KEY")             
+# encoder_key = os.getenv("ENCODER_KEY")         
+# skew_key = os.getenv("SKEW_KEY")               
+# label_encoder_key = os.getenv("LABEL_ENCODER_KEY")
+# AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+# AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+# AWS_DEFAULT_REGION = os.getenv("AWS_DEFAULT_REGION", "ap-south-1")
+# AWS_ACCESS_KEY_ID="AKIA3WVO4RCHNMR6IGEZ"
+# AWS_SECRET_ACCESS_KEY="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"
+# AWS_DEFAULT_REGION=
+# MODEL_KEY="models/lightgbm_adasyn_pipeline.pkl"
+# ENCODER_KEY="encoders/ohe_wildernessandsoil.pkl"
+# SKEW_KEY="encoders/skew_constants.pkl"
+# LABEL_ENCODER_KEY="encoders/label_encoder_cover_type.pkl"
+model_key = "models/lightgbm_adasyn_pipeline.pkl"
+encoder_key ="encoders/ohe_wildernessandsoil.pkl"
+skew_key = "encoders/skew_constants.pkl"
+label_encoder_key = "encoders/label_encoder_cover_type.pkl"
+AWS_ACCESS_KEY_ID = "AKIA3WVO4RCHNMR6IGEZ"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_DEFAULT_REGION ="ap-south-1"
+
 
 s3 = boto3.client(
     "s3",
@@ -25,11 +40,11 @@ s3 = boto3.client(
 @st.cache_resource
 def load_all_from_s3():
     # 1️⃣ Load OneHotEncoder
-    ohe_obj = s3.get_object(Bucket=bucket_name, Key=ohe_encoder_key)
+    ohe_obj = s3.get_object(Bucket=bucket_name, Key=encoder_key)
     loaded_encoder = pickle.load(io.BytesIO(ohe_obj['Body'].read()))
 
     # 2️⃣ Load skew constants
-    skew_obj = s3.get_object(Bucket=bucket_name, Key=skew_constants)
+    skew_obj = s3.get_object(Bucket=bucket_name, Key=skew_key)
     loader_skewconstant = pickle.load(io.BytesIO(skew_obj['Body'].read()))
 
     # 3️⃣ Load model
@@ -37,7 +52,7 @@ def load_all_from_s3():
     model = joblib.load(io.BytesIO(model_obj['Body'].read()))
 
     # 4️⃣ Load label encoder
-    label_obj = s3.get_object(Bucket=bucket_name, Key=le_endoder_key)
+    label_obj = s3.get_object(Bucket=bucket_name, Key=label_encoder_key)
     label_encoder = pickle.load(io.BytesIO(label_obj['Body'].read()))
 
     return loaded_encoder, loader_skewconstant, model, label_encoder
@@ -207,3 +222,4 @@ if Soil_Type != 15:
     predicted_class = label_encoder.inverse_transform([encoded_value])[0]
     st.json(raww_data.to_dict(orient='records'))
     st.markdown(f"### The Predicted Class is **:green[{predicted_class}]**")
+
