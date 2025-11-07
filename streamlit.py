@@ -7,7 +7,7 @@ import boto3
 import io
 import os
 
-# bucket_name = "forestclassification"  
+bucket_name = "forestclassification"  
 # model_key = os.getenv("MODEL_KEY")             
 # encoder_key = os.getenv("ENCODER_KEY")         
 # skew_key = os.getenv("SKEW_KEY")               
@@ -222,4 +222,5 @@ if Soil_Type != 15:
     predicted_class = label_encoder.inverse_transform([encoded_value])[0]
     st.json(raww_data.to_dict(orient='records'))
     st.markdown(f"### The Predicted Class is **:green[{predicted_class}]**")
+
 
