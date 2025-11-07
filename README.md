@@ -27,7 +27,8 @@
 - Saving the model into a pickle file and using for future predictions
 
 ### 4)Saving all pickle files in AWS S3
-### 5)Streamlit Application:
+
+### 5)Streamlit Application: (https://github.com/kevinxaviour/Forest_Class_Classification/blob/580610e677847f0420b071bb62f787adcef474b3/streamlit.py)
 - Reading Pickle Files from AWS S3
 - Creating Manual Input and also Slider drag drop input for entering feature values
 - Inputing data and getting the predictions in the application.
