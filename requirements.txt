@@ -1,6 +1,7 @@
+streamlit
 pandas
 numpy
-seaborn
-matplotlib
-scikit-learn
--e .
+joblib
+pickle
+boto3
+io
