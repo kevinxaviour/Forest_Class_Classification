@@ -207,7 +207,8 @@ if Soil_Type != 15:
     encoded_value = out
     predicted_class = label_encoder.inverse_transform([encoded_value])[0]
     st.json(raww_data.to_dict(orient='records'))
-    st.markdown(f"### The Predicted Class is **:green[{predicted_class}]**")
+    st.markdown(f"### The Predicted Forest Cover is **:green[{predicted_class}]**")
+
 
 
 
