@@ -1,4 +1,4 @@
-# End to End Forest Class Classification ML Mini Project
+# End to End Forest Cover Classification ML Mini Project
 - Predict or test model @ https://forestclassclassification.streamlit.app/
 
 ## Work Flow
