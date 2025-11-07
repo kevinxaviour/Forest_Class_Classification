@@ -13,10 +13,10 @@
 - Outliers detection.
 - Skewness and Kurtosis Detection.
 - Univariate and Bivariate Analysis
-- Making the data features normally distributed for relevant features
+- Making the data features normally distributed.
 
 ### 3) Model training: (https://github.com/kevinxaviour/Forest_Class_Classification/blob/eea945dac294e644aed91d944c0d36661f856181/modeltraining.ipynb)
--  Traing With different Classification Model
+-  Training With different Classification Model
    - Logistic Regression
    - KNN Classifier
    - Decision Tree
@@ -27,9 +27,12 @@
 - Saving the best model into a pickle file and using for future predictions
 
 ### 4) Saving all pickle files in AWS S3
+- This process is done because github file size restriction is 25MB.
+- But the Model here was more than 25MB.
 
 ### 5) Streamlit Application: (https://github.com/kevinxaviour/Forest_Class_Classification/blob/580610e677847f0420b071bb62f787adcef474b3/streamlit.py)
 - Reading Pickle Files from AWS S3
+- The credentials will not be initialized in streamlit.py file but in streamlit environment for data security.
 - Creating Manual Input and also Slider drag drop input for entering feature values
 - Inputing data and getting the predictions in the application.
 
