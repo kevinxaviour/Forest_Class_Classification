@@ -1,4 +1,4 @@
-## End to End Forest Class Classification Project
+# End to End Forest Class Classification Project
 ### Predict or test model @ https://forestclassclassification.streamlit.app/
 
 ## Work Flow
@@ -33,6 +33,6 @@
 - Creating Manual Input and also Slider drag drop input for entering feature values
 - Inputing data and getting the predictions in the application.
 
-## THE END
+# THE END
 
 
