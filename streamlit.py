@@ -25,19 +25,19 @@ s3 = boto3.client(
 )
 @st.cache_resource
 def load_all_from_s3():
-    # 1️⃣ Load OneHotEncoder
+    # Load OneHotEncoder
     ohe_obj = s3.get_object(Bucket=bucket_name, Key=encoder_key)
     loaded_encoder = pickle.load(io.BytesIO(ohe_obj['Body'].read()))
 
-    # 2️⃣ Load skew constants
+    # Load skew constants
     skew_obj = s3.get_object(Bucket=bucket_name, Key=skew_key)
     loader_skewconstant = pickle.load(io.BytesIO(skew_obj['Body'].read()))
 
-    # 3️⃣ Load model
+    # Load model
     model_obj = s3.get_object(Bucket=bucket_name, Key=model_key)
     model = joblib.load(io.BytesIO(model_obj['Body'].read()))
 
-    # 4️⃣ Load label encoder
+    # Load label encoder
     label_obj = s3.get_object(Bucket=bucket_name, Key=label_encoder_key)
     label_encoder = pickle.load(io.BytesIO(label_obj['Body'].read()))
 
@@ -208,6 +208,7 @@ if Soil_Type != 15:
     predicted_class = label_encoder.inverse_transform([encoded_value])[0]
     st.json(raww_data.to_dict(orient='records'))
     st.markdown(f"### The Predicted Class is **:green[{predicted_class}]**")
+
 
 
 
